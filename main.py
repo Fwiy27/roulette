@@ -1,2 +1,5 @@
-from board.board import print_board
+from ui.ui import UI
 
+u = UI()
+
+u.play()
