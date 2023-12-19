@@ -41,10 +41,12 @@ class UI:
         self.table_min = table_min
         self.table_max = table_max
         # Money
+        self.starting_money = money
         self.money = money
         self.bet_amount = max(min(round(money * 0.00333333333), table_max), table_min)
         
     def play(self):
+        bets = 0
         mode = 1
         ready = False
         while self.money >= self.table_min:
@@ -64,6 +66,12 @@ class UI:
                     case 'clear':
                         clear_screen()
                         exit()
+                    case 'info':
+                        clear_screen()
+                        ready = False
+                        print(f'Money: ${self.money}')
+                        print(f'Money Earned: ${(self.money - self.starting_money)}')
+                        input(f'Bets: {bets}\nAbout {bets*2/60} hours\nPress Enter to Continue . . .')
                     case 'set':
                         ready = False
                         try:
@@ -114,6 +122,7 @@ class UI:
                         clear_screen()
                         input(help)
             if ready:
+                bets += 1
                 clear_screen()
                 winning_index = spin()
                 match mode:
